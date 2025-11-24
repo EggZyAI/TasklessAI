@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Taskless AI – Simple Automations for Small Businesses</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Taskless AI builds simple, done-for-you AI automations that save small businesses 5–10 hours every week."
+  />
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #0b1020;
+      --card: #101529;
+      --accent: #7c3aed;
+      --accent-soft: rgba(124, 58, 237, 0.12);
+      --accent-strong: rgba(124, 58, 237, 0.3);
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --border-subtle: rgba(148, 163, 184, 0.2);
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.65);
+      --shadow-subtle: 0 12px 30px rgba(15, 23, 42, 0.4);
+      --max-width: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Inter", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 20px 16px 64px;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(2, 6, 23, 0.95), rgba(2, 6, 23, 0.7));
+      border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+    }
+
+    .header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #a855f7, #4f46e5);
+      box-shadow: 0 0 30px rgba(129, 140, 248, 0.7);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border-radius: inherit;
+      border: 2px solid rgba(248, 250, 252, 0.45);
+      opacity: 0.85;
+    }
+
+    .logo-text-main {
+      font-weight: 650;
+      letter-spacing: 0.04em;
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+
+    .logo-text-sub {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    nav a {
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 1px;
+      background: linear-gradient(to right, #a855f7, #22d3ee);
+      transition: width 0.18s ease-out;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(129, 140, 248, 0.6);
+      background: radial-gradient(circle at top left, rgba(129, 140, 248, 0.45), #111827);
+      color: #f9fafb;
+      font-size: 0.8rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .nav-cta span {
+      font-size: 1.1rem;
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.3fr);
+      gap: 30px;
+      padding: 28px 0 40px;
+      align-items: center;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px 4px 5px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      width: max-content;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.8);
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    .pill-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #22c55e, #16a34a);
+      box-shadow: 0 0 20px rgba(34, 197, 94, 0.8);
+      position: relative;
+    }
+
+    .pill-dot::after {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border-radius: inherit;
+      border: 1px solid rgba(248, 250, 252, 0.7);
+      opacity: 0.8;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 4vw, 2.9rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-title span {
+      background: linear-gradient(to right, #c4b5fd, #a855f7, #22d3ee);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: var(--muted);
+      max-width: 35rem;
+    }
+
+    .hero-subtitle strong {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 4px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 0 0, #a855f7, #4f46e5);
+      color: #f9fafb;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 18px 38px rgba(55, 48, 163, 0.7);
+    }
+
+    .btn-primary small {
+      font-size: 1rem;
+    }
+
+    .btn-secondary {
+      border-radius: 999px;
+      padding: 9px 16px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--muted);
+      font-size: 0.82rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+    }
+
+    .btn-secondary span {
+      font-size: 1.1rem;
+    }
+
+    .hero-footnote {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .hero-footnote strong {
+      color: #e5e7eb;
+    }
+
+    .hero-right {
+      position: relative;
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at 0 0, rgba(79, 70, 229, 0.25), #020617);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 16px 16px 18px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .hero-card-badge {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.84);
+      border: 1px solid rgba(129, 140, 248, 0.7);
+      font-size: 0.72rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-card-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .hero-card-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1.1fr;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .hero-metric {
+      padding: 9px 10px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      margin-bottom: 8px;
+    }
+
+    .hero-metric-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 2px;
+    }
+
+    .hero-metric-value {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .hero-metric-tag {
+      font-size: 0.7rem;
+      color: #bbf7d0;
+    }
+
+    .hero-list {
+      font-size: 0.78rem;
+      color: var(--muted);
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.92);
+      padding: 8px 9px;
+      margin-top: 2px;
+    }
+
+    .hero-list-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .hero-list-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .hero-list-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.76rem;
+    }
+
+    .hero-list-label span {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(129, 140, 248, 0.7);
+    }
+
+    .hero-list-pill {
+      font-size: 0.7rem;
+      color: #a5b4fc;
+      background: rgba(55, 65, 81, 0.8);
+      border-radius: 999px;
+      padding: 2px 8px;
+    }
+
+    .hero-card-footer {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .hero-card-footer strong {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .hero-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .hero-chip {
+      font-size: 0.69rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: #cbd5f5;
+    }
+
+    /* SECTIONS */
+    section {
+      margin-top: 40px;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 32rem;
+    }
+
+    .section-header {
+      margin-bottom: 14px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top, #020617, #020617);
+      border: 1px solid var(--border-subtle);
+      padding: 14px 14px 16px;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .card-title {
+      font-size: 0.96rem;
+      font-weight: 550;
+      margin-bottom: 2px;
+    }
+
+    .card-body {
+      font-size: 0.83rem;
+      color: var(--muted);
+    }
+
+    .pill-soft {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(129, 140, 248, 0.4);
+      font-size: 0.7rem;
+      color: #c4b5fd;
+    }
+
+    .pill-soft span {
+      font-size: 1.1rem;
+    }
+
+    .bullet-list {
+      padding-left: 1.1rem;
+      margin: 6px 0 0;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .bullet-list li {
+      margin-bottom: 3px;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+      font-size: 0.78rem;
+    }
+
+    .stat-chip {
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      color: #e5e7eb;
+    }
+
+    /* PRICING */
+    .pricing-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .pricing-card {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top, rgba(79, 70, 229, 0.23), #020617);
+      border: 1px solid rgba(129, 140, 248, 0.6);
+      padding: 14px 14px 16px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .pricing-name {
+      font-size: 1rem;
+      font-weight: 560;
+    }
+
+    .pricing-price {
+      margin-top: 6px;
+      font-size: 0.92rem;
+    }
+
+    .pricing-price strong {
+      font-size: 1.2rem;
+    }
+
+    .pricing-list {
+      margin-top: 8px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      padding-left: 1.1rem;
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 0.68rem;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(129, 140, 248, 0.7);
+      color: #c7d2fe;
+    }
+
+    /* FAQ */
+    .faq-item {
+      border-radius: var(--radius-lg);
+      background: #020617;
+      border: 1px solid var(--border-subtle);
+      padding: 10px 12px 11px;
+      margin-bottom: 8px;
+    }
+
+    .faq-q {
+      font-size: 0.9rem;
+      font-weight: 520;
+      margin-bottom: 4px;
+    }
+
+    .faq-a {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .contact-card {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top, #020617, #000);
+      border: 1px solid var(--border-subtle);
+      padding: 14px 14px 16px;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    form {
+      display: grid;
+      gap: 9px;
+      font-size: 0.84rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 7px 9px;
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.84rem;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: rgba(129, 140, 248, 0.9);
+      box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.6);
+    }
+
+    .contact-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .contact-badge {
+      font-size: 0.76rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      color: var(--muted);
+    }
+
+    .contact-badge span {
+      font-size: 1.1rem;
+    }
+
+    /* FOOTER */
+    footer {
+      max-width: var(--max-width);
+      margin: 32px auto 0;
+      padding: 12px 16px 30px;
+      border-top: 1px solid rgba(30, 64, 175, 0.6);
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    footer a {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 3px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 880px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding-top: 26px;
+      }
+      .hero-right {
+        order: -1;
+      }
+      .grid-3,
+      .pricing-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .header-inner {
+        padding-inline: 12px;
+      }
+      nav {
+        display: none;
+      }
+      main {
+        padding-inline: 12px;
+      }
+      .grid-3,
+      .pricing-grid,
+      .grid-2 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-card {
+        padding: 14px 12px;
+      }
+      .hero-card-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-mark"></div>
+        <div>
+          <div class="logo-text-main">Taskless AI</div>
+          <div class="logo-text-sub">Small business automations</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact" class="nav-cta">
+          Book a free demo <span>↗</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero-left">
+        <div class="pill">
+          <div class="pill-dot"></div>
+          <span>Done-for-you AI for small businesses</span>
+        </div>
+        <h1 class="hero-title">
+          Save <span>5–10 hours every week</span><br />
+          with simple AI automations.
+        </h1>
+        <p class="hero-subtitle">
+          Taskless AI builds and manages small, safe AI systems that handle your
+          <strong>customer messages, content, FAQs and reviews</strong> – so you can
+          get back to actually running your business.
+        </p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn-primary">
+            <small>⚡</small> Get a free custom demo
+          </a>
+          <a href="#services" class="btn-secondary">
+            <span>◎</span> See what we automate
+          </a>
+        </div>
+        <div class="hero-footnote">
+          No coding. No new apps to learn. <strong>We set it up and maintain it for you.</strong>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <span>Example: local salon automation</span>
+            <div class="hero-card-badge">
+              <div class="hero-card-badge-dot"></div>
+              Live 24/7
+            </div>
+          </div>
+
+          <div class="hero-card-grid">
+            <div>
+              <div class="hero-metric">
+                <div class="hero-metric-label">Weekly time saved</div>
+                <div class="hero-metric-value">7.3 hrs</div>
+                <div class="hero-metric-tag">DMs + FAQs automated</div>
+              </div>
+              <div class="hero-metric">
+                <div class="hero-metric-label">More online bookings</div>
+                <div class="hero-metric-value">+31%</div>
+                <div class="hero-metric-tag">faster replies = more clients</div>
+              </div>
+            </div>
+            <div>
+              <div class="hero-list">
+                <div class="hero-list-item">
+                  <div class="hero-list-label">
+                    <span></span> New DMs handled
+                  </div>
+                  <div class="hero-list-pill">92%</div>
+                </div>
+                <div class="hero-list-item">
+                  <div class="hero-list-label">
+                    <span></span> FAQs answered
+                  </div>
+                  <div class="hero-list-pill">24/7</div>
+                </div>
+                <div class="hero-list-item">
+                  <div class="hero-list-label">
+                    <span></span> Review replies
+                  </div>
+                  <div class="hero-list-pill">Automatic</div>
+                </div>
+                <div class="hero-list-item">
+                  <div class="hero-list-label">
+                    <span></span> Owner involvement
+                  </div>
+                  <div class="hero-list-pill">~10 min/week</div>
+                </div>
+              </div>
+              <div class="hero-card-footer">
+                <span>Built with safe AI tools, fully customised to your business.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-chip-row">
+            <div class="hero-chip">Salons</div>
+            <div class="hero-chip">Cafés</div>
+            <div class="hero-chip">Tattoo studios</div>
+            <div class="hero-chip">Nail techs</div>
+            <div class="hero-chip">Airbnb hosts</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="section-header">
+        <h2 class="section-title">What we automate for you</h2>
+        <p class="section-subtitle">
+          We focus on small, high-impact automations that feel natural to your customers and actually
+          save you hours every week.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="card-header">
+            <span class="pill-soft"><span>✍️</span> Social content</span>
+            <span>From £150 setup</span>
+          </div>
+          <div class="card-title">Social Media Content Engine</div>
+          <div class="card-body">
+            A custom AI assistant that writes
+            <strong>30 days of posts, captions and ideas</strong> in your tone of voice, using your
+            offers and photos.
+            <ul class="bullet-list">
+              <li>Instagram, Facebook, TikTok & more</li>
+              <li>Captions, hooks, CTAs & hashtags</li>
+              <li>Updated monthly with your promos</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="pill-soft"><span>💬</span> Customer messages</span>
+            <span>From £200 setup</span>
+          </div>
+          <div class="card-title">Customer Support & FAQ Assistant</div>
+          <div class="card-body">
+            We set up a 24/7 assistant that handles your
+            <strong>common questions, booking info and policies</strong> via website, email or DMs.
+            <ul class="bullet-list">
+              <li>Answers FAQs in seconds</li>
+              <li>Always stays on-brand & polite</li>
+              <li>Hands off to you when needed</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="pill-soft"><span>⭐</span> Reviews & reputation</span>
+            <span>From £100 setup</span>
+          </div>
+          <div class="card-title">Review Response Automations</div>
+          <div class="card-body">
+            Keep your <strong>Google, Facebook and Airbnb reviews</strong> looking professional with
+            smart, custom replies written for you.
+            <ul class="bullet-list">
+              <li>Positive reviews answered automatically</li>
+              <li>Thoughtful drafts for negative feedback</li>
+              <li>Weekly summary of key themes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-2" style="margin-top: 14px;">
+        <div class="card">
+          <div class="card-header">
+            <span class="pill-soft"><span>🧾</span> Admin & reminders</span>
+            <span>From £300 setup</span>
+          </div>
+          <div class="card-title">Back-Office AI Assistant</div>
+          <div class="card-body">
+            A quiet helper for your inbox and admin:
+            <ul class="bullet-list">
+              <li>Drafts polite replies to emails</li>
+              <li>Creates reminders for invoices & bookings</li>
+              <li>Daily summary of what needs your attention</li>
+            </ul>
+            <div class="stat-row">
+              <div class="stat-chip">Ideal for busy owners</div>
+              <div class="stat-chip">No extra staff required</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="pill-soft"><span>🧩</span> Custom workflows</span>
+            <span>Quote on request</span>
+          </div>
+          <div class="card-title">Custom AI Workflow Design</div>
+          <div class="card-body">
+            Have something more specific in mind? We’ll map your current process and create a
+            <strong>simple, fully custom automation</strong> around it.
+            <ul class="bullet-list">
+              <li>Lead follow-up sequences</li>
+              <li>New client onboarding flows</li>
+              <li>Multi-step admin automations</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works">
+      <div class="section-header">
+        <h2 class="section-title">How it works</h2>
+        <p class="section-subtitle">
+          No tech overwhelm. We keep things light, understandable and easy to manage – even if you
+          “don’t do tech”.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="card-header">
+            <span>Step 1</span>
+            <span>15–20 minutes</span>
+          </div>
+          <div class="card-title">Free discovery call or chat</div>
+          <div class="card-body">
+            Tell us how your business runs and what’s currently eating your time. We’ll suggest 1–3
+            automations that make sense for you – or tell you honestly if you don’t need them yet.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span>Step 2</span>
+            <span>1–3 days</span>
+          </div>
+          <div class="card-title">We design & build your automation</div>
+          <div class="card-body">
+            We set everything up using battle-tested tools and your real wording, prices and policies.
+            You can review and test everything before it goes live.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span>Step 3</span>
+            <span>Ongoing</span>
+          </div>
+          <div class="card-title">We maintain & improve it for you</div>
+          <div class="card-body">
+            On a monthly plan, we keep your system updated, fix any issues and tweak it as your offers
+            change, so you never have to think about it.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing">
+      <div class="section-header">
+        <h2 class="section-title">Simple pricing that scales with you</h2>
+        <p class="section-subtitle">
+          Most clients start with one automation and add more over time. Every setup includes a
+          strategy session, build, testing and light training.
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="card">
+          <div class="pricing-label">Starter</div>
+          <div class="pricing-name">Single Automation</div>
+          <div class="pricing-price">
+            <strong>£150–£300</strong> one-off<br />
+            <span>+ £75–£150 / month (optional)</span>
+          </div>
+          <ul class="pricing-list">
+            <li>One done-for-you automation</li>
+            <li>Perfect for social content or FAQs</li>
+            <li>Email support for 30 days</li>
+            <li>Optional ongoing maintenance</li>
+          </ul>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-badge">Most popular</div>
+          <div class="pricing-label">Growth</div>
+          <div class="pricing-name">2–3 Key Automations</div>
+          <div class="pricing-price">
+            <strong>£400–£800</strong> one-off<br />
+            <span>+ £150–£300 / month</span>
+          </div>
+          <ul class="pricing-list">
+            <li>Mix of content, FAQs and reviews</li>
+            <li>Monthly optimisation & updates</li>
+            <li>Priority email support</li>
+            <li>Quarterly strategy check-in</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="pricing-label">Custom</div>
+          <div class="pricing-name">Full Automation Suite</div>
+          <div class="pricing-price">
+            <strong>From £1,000</strong> project<br />
+            <span>Custom monthly support</span>
+          </div>
+          <ul class="pricing-list">
+            <li>End-to-end workflow design</li>
+            <li>Multiple teams & channels</li>
+            <li>Custom integration options</li>
+            <li>Dedicated support & reporting</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASE STUDY / TRUST -->
+    <section>
+      <div class="section-header">
+        <h2 class="section-title">Built for real, busy owners</h2>
+        <p class="section-subtitle">
+          Whether you run a salon, café, studio or service business, the goal is the same: more time
+          back, without hiring more staff.
+        </p>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-title">Example: nail studio owner</div>
+          <div class="card-body">
+            A solo nail tech was spending evenings replying to DMs and answering the same questions.
+            We:
+            <ul class="bullet-list">
+              <li>Automated answers for prices, location, policies & aftercare</li>
+              <li>Built a content assistant for weekly posts</li>
+              <li>Set up a simple “booking info” flow</li>
+            </ul>
+            <div class="stat-row">
+              <div class="stat-chip">~6 hours saved per week</div>
+              <div class="stat-chip">No more “sorry for the late reply”</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Example: small café</div>
+          <div class="card-body">
+            A local café wanted more consistent social media without hiring an agency. We:
+            <ul class="bullet-list">
+              <li>Created a monthly content generator</li>
+              <li>Used their menu & photos as training data</li>
+              <li>Prepared plug-and-post captions for staff</li>
+            </ul>
+            <div class="stat-row">
+              <div class="stat-chip">Daily posting made simple</div>
+              <div class="stat-chip">Owner spends ~15 min/month</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="section-header">
+        <h2 class="section-title">Questions you might have</h2>
+        <p class="section-subtitle">
+          If you’re not sure whether AI is right for your business yet, you probably have at least one
+          of these questions.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Do I need to be “good with tech” to use this?</div>
+        <div class="faq-a">
+          No. We design your automations so they run quietly in the background. You’ll get a very simple
+          way to review and tweak things, but we’ll handle the setup and maintenance for you.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Will it sound like a robot talking to my customers?</div>
+        <div class="faq-a">
+          We train each assistant on your real wording, tone and policies, then test it with you before
+          it goes live. You can always override or edit messages, and we can make it as formal or casual
+          as you like.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Is my data safe?</div>
+        <div class="faq-a">
+          We use reputable AI providers and follow their best practices for privacy and safety. We never
+          sell or share your data. If you have specific concerns, we’re happy to talk them through in
+          plain language.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What if I decide it’s not for me?</div>
+        <div class="faq-a">
+          That’s okay. Start with a single automation and try it for a month. If it’s not saving you
+          time or making life easier, you can pause or cancel your plan at any time.
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-header">
+        <h2 class="section-title">Book your free automation demo</h2>
+        <p class="section-subtitle">
+          Tell us a bit about your business and we’ll record a short custom demo showing how AI could
+          save you time. No pressure, no jargon.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <form>
+            <div>
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" placeholder="Alex, owner of Glow Studio" />
+            </div>
+
+            <div>
+              <label for="business">Business name & type</label>
+              <input
+                id="business"
+                name="business"
+                type="text"
+                placeholder="Glow Studio – nail & beauty salon"
+              />
+            </div>
+
+            <div>
+              <label for="email">Email</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                required
+              />
+            </div>
+
+            <div>
+              <label for="hours">What do you spend too much time on right now?</label>
+              <textarea
+                id="hours"
+                name="hours"
+                placeholder="Example: replying to DMs, answering the same questions, writing posts, dealing with reviews..."
+              ></textarea>
+            </div>
+
+            <div>
+              <label for="platforms">Where do your customers message you?</label>
+              <input
+                id="platforms"
+                name="platforms"
+                type="text"
+                placeholder="Instagram, Facebook, WhatsApp, email, website..."
+              />
+            </div>
+
+            <button type="submit" class="btn-primary" style="margin-top: 4px;">
+              <small>📹</small> Request my free demo
+            </button>
+          </form>
+
+          <div class="contact-meta">
+            You’ll hear back within 1–2 business days. If you’d prefer to just email us, contact:
+            <strong>hello@taskless.ai</strong> (edit this to your real email).
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-badge">
+            <span>🤝</span> Not sure where to start?
+          </div>
+          <p style="font-size: 0.87rem; color: var(--muted); margin-top: 0;">
+            Many owners feel overwhelmed by “AI” at first. Our job is to translate it into
+            <strong>clear, simple wins</strong> for your specific business.
+          </p>
+          <ul class="bullet-list">
+            <li>We’ll never push an automation you don’t need.</li>
+            <li>We prioritise small changes that actually stick.</li>
+            <li>We can start tiny and grow with you.</li>
+          </ul>
+
+          <p class="contact-meta">
+            Use the form to request a demo, or send a quick message introducing your business and your
+            biggest headache – we’ll take it from there.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> Taskless AI. All rights reserved.</span>
+    <span>
+      Built for salons, cafés, studios & small service businesses.
+    </span>
+  </footer>
+
+  <script>
+    // Set current year automatically
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
